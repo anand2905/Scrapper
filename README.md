@@ -18,3 +18,6 @@
 * After scrapping it will `bulk import the records in db`
 
 * Search the events based on `title`
+
+# Scrapper
+Fetch the information related to cultural activities in Berlin into one site
