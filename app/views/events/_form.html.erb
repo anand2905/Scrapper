@@ -1,0 +1,7 @@
+<%= simple_form_for @event do |f| %>
+	<%= f.input :title, lable: "Event Title", class: "form-control" %>
+	<%= f.input :date , class: "form-control"%>
+	<%= f.input :place, class: "form-control" %>
+	<%= f.input :description, class: "form-control" %>
+	<%= f.button :submit, class: "btn-custom2" %>
+<% end %>

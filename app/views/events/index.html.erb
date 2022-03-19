@@ -1,0 +1,51 @@
+<div class="row">
+<%= form_tag('/scrape_event') do %>
+	Enter events url: <input type="text" name="url" value="">
+	<input type="submit" name="submit">
+<% end %>
+
+<% if @events.count == 0 %>
+	<h2>There are no Events to show, Please enter event url to scrape ("https://www.visitberlin.de/en/event-calendar-berlin") :)</h2>
+<% else %>
+
+<%= form_tag(events_path, method: 'get') do %>
+  <div class="input-group">
+    <%= search_field_tag :search, params[:search], placeholder: "Search event with title", class: "form-control"%>
+    <div class="input-group-btn">
+      <%= button_tag "Search for Events", class: 'btn btn-info glyphicon-search', name: nil%>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+<%= will_paginate @events, renderer: BootstrapPagination::Rails%>
+ <table class="table">
+  <thead class="thead-dark">
+    <tr> 
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+      <th scope="col">Place</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead><%#= will_paginate @events %> 
+  <% @events.each do |event| %>
+  <tbody>
+    <tr>
+      <td><%= event.title %></td>
+      <td><%= event.date %></td>
+      <td><%= event.place %></td>
+      <td><%= event.description[0..50]%></td>
+    </tr>
+    <% end %>
+  </tbody>
+
+  <% end %> 
+</table>
+
+<%= will_paginate @events, renderer: BootstrapPagination::Rails%>  
+<h2><%= link_to 'Add Event', new_event_path %></h2></br>
+<%= link_to 'Back', events_path %>
+</div>
+
+
+</div>
